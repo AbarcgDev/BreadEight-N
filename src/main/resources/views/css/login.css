@@ -1,0 +1,25 @@
+/* Establecer el ancho y la altura de la ventana de inicio de sesión */
+.login-pane {
+    -fx-background-color: #f4f4f4;
+    -fx-min-width: 300px; /* Ancho mínimo */
+    -fx-min-height: 200px; /* Altura mínima */
+}
+
+/* Modificar el tamaño y la posición de los campos de texto y contraseña */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px; /* Ancho preferido */
+}
+
+.password-field {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px; /* Ancho preferido */
+}
+
+/* Modificar la posición y el tamaño del botón de inicio de sesión */
+.button {
+    -fx-background-color: #4285f4;
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 100px; /* Ancho preferido */
+}
+

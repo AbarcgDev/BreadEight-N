@@ -1,0 +1,95 @@
+.root {
+    -fx-background-color: #f2f2f2; /* Color de fondo principal */
+}
+
+/* Barra superior */
+.button-bar {
+    -fx-background-color: #4CAF50; /* Verde oscuro */
+}
+
+.button-bar .button {
+    -fx-text-fill: white; /* Texto en botones de la barra superior en blanco */
+    -fx-background-color: #45a049; /* Verde más claro */
+}
+
+/* Barra lateral izquierda */
+.tool-bar {
+    -fx-background-color: #333; /* Fondo negro */
+}
+
+.tool-bar .button {
+    -fx-text-fill: white; /* Texto en botones de la barra lateral en blanco */
+}
+
+/* Contenido central */
+.split-pane {
+    -fx-background-color: #fff; /* Fondo blanco */
+}
+
+/* Sección de entrada de productos */
+.vbox {
+    -fx-background-color: #fff; /* Fondo blanco */
+    -fx-padding: 20;
+}
+
+.label {
+    -fx-text-fill: #333; /* Texto oscuro */
+}
+
+.text-field {
+    -fx-background-color: #f9f9f9; /* Fondo gris claro */
+    -fx-text-fill: #333; /* Texto oscuro en el campo de texto */
+    -fx-border-color: #ccc; /* Color del borde gris claro */
+    -fx-border-width: 1; /* Ancho del borde */
+}
+
+.button-bar .button,
+.button {
+    -fx-background-color: #4CAF50; /* Verde oscuro */
+    -fx-text-fill: white; /* Texto en botones en blanco */
+}
+
+/* Sección de lista de productos */
+.table-view {
+    -fx-background-color: #fff; /* Fondo blanco */
+}
+
+.table-view .column-header,
+.table-view .table-row-cell {
+    -fx-background-color: #f9f9f9; /* Fondo gris claro */
+}
+
+/* Botones al final de la lista de productos */
+.button-bar .button {
+    -fx-background-color: #e44d26; /* Naranja oscuro */
+    -fx-text-fill: white;}/* Text
+
+/* Estilo para TextField al hacer hover */
+.text-field:hover {
+    -fx-background-color: #e0e0e0; /* Color de fondo al hacer hover */
+    -fx-border-color: #4CAF50; /* Color del borde al hacer hover */
+}
+
+/* Estilo para TextField al tener focus */
+.text-field:focused {
+    -fx-background-color: #e0e0e0; /* Color de fondo al tener focus */
+    -fx-border-color: #4CAF50; /* Color del borde al tener focus */
+}
+
+/* Estilo para Button al hacer hover */
+.button:hover {
+    -fx-background-color: #39813E; /* Tono más oscuro para hacer hover */
+    -fx-text-fill: #ffffff; /* Color del texto al hacer hover */
+}
+
+/* Estilo para Button al tener focus */
+.button:focused {
+    -fx-background-color: #39813E; /* Tono más oscuro para tener focus */
+    -fx-text-fill: #ffffff; /* Color del texto al tener focus */
+}
+
+/* Estilo para Button al estar presionado */
+.button:pressed {
+    -fx-background-color: #2F6D34; /* Tono aún más oscuro al estar presionado */
+}
+
