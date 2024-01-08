@@ -1,9 +1,10 @@
-package com.breadeightn.panaderias.empleados.infrastructure.uicontrollers;
+package com.breadeightn.panaderias.fxcontrollers;
 
 import com.breadeightn.panaderias.PanaderiasApplication;
+import com.breadeightn.panaderias.areas.domain.Area;
 import com.breadeightn.panaderias.empleados.application.services.EmpleadosServicio;
 import com.breadeightn.panaderias.empleados.domain.dto.EmpleadoLoginDto;
-import com.breadeightn.panaderias.empleados.domain.model.SesionInfo;
+import com.breadeightn.panaderias.empleados.domain.model.LoginEmpleado;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 
 import static com.breadeightn.panaderias.PanaderiasApplication.context;
 
-@Component
+@Controller
 public class LoginCtrl implements Initializable {
     @FXML
     private TextField rfcField;
@@ -53,24 +54,30 @@ public class LoginCtrl implements Initializable {
         onLoginSuccess(login.get());
     }
 
-    public void onLoginSuccess(SesionInfo sesionInfo) {
+    public void onLoginSuccess(LoginEmpleado loginEmpleado) {
             // Cargar la vista de la pantalla principal
-        FXMLLoader loader = new FXMLLoader(PanaderiasApplication.class.getResource("/views/ventasVendedor.fxml"));
+        FXMLLoader loader = getView(loginEmpleado.getArea());
         Parent root = null;
         try {
             loader.setControllerFactory(context::getBean);
             root = loader.load();
-            VentasVendedorCtrl ventaController = loader.getController();
-            ventaController.initializeSessionInfo(sesionInfo);
-        // Crear la escena
+            VentasVendedorCtrl controller = loader.getController();
+            controller.initializeSessionInfo(loginEmpleado);
             Scene scene = new Scene(root);
-        // Obtener el escenario actual
             Stage stage = (Stage) loginButton.getScene().getWindow();
-        // Establecer la nueva escena
+            stage.close();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private FXMLLoader getView(Area area) {
+        String vista = switch (area) {
+            case VENTAS -> "ventasVendedor";
+            case RECURSOS_HUMANOS -> "recursosHumanos";
+        };
+        return new FXMLLoader(PanaderiasApplication.class.getResource("/views/" + vista + ".fxml"));
     }
 }

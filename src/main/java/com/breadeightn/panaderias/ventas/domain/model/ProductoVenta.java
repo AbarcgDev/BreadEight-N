@@ -1,4 +1,4 @@
-package com.breadeightn.panaderias.empleados.domain.model;
+package com.breadeightn.panaderias.ventas.domain.model;
 
 import com.breadeightn.panaderias.productos.domain.model.Producto;
 import lombok.AllArgsConstructor;

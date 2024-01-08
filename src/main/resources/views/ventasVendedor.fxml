@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1278.0" stylesheets="@css/ventasVendedor.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.breadeightn.panaderias.empleados.infrastructure.uicontrollers.VentasVendedorCtrl">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1278.0" stylesheets="@css/ventasVendedor.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.breadeightn.panaderias.fxcontrollers.VentasVendedorCtrl">
    <top>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
@@ -62,7 +62,7 @@
                     </columns>
                   </TableView>
                   <Button layoutX="132.0" layoutY="568.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Cancelar" />
-                  <Button layoutX="441.0" layoutY="567.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="200.0" text="Aceptar" />
+                  <Button fx:id="crearVentaBtn" onAction="#crearVenta" layoutX="441.0" layoutY="567.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="200.0" text="Aceptar" />
                </children>
             </AnchorPane>
         </items>

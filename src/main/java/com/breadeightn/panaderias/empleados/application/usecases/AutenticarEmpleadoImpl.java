@@ -1,7 +1,7 @@
 package com.breadeightn.panaderias.empleados.application.usecases;
 
 import com.breadeightn.panaderias.empleados.domain.dto.EmpleadoLoginDto;
-import com.breadeightn.panaderias.empleados.domain.model.SesionInfo;
+import com.breadeightn.panaderias.empleados.domain.model.LoginEmpleado;
 import com.breadeightn.panaderias.empleados.domain.ports.in.AutenticarEmpleado;
 import com.breadeightn.panaderias.empleados.domain.ports.out.EmpleadosRepositoryPort;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class AutenticarEmpleadoImpl implements AutenticarEmpleado {
     private final EmpleadosRepositoryPort empleadosRepositoryPort;
     @Override
-    public Optional<SesionInfo> autenticarEmpleado(EmpleadoLoginDto loginInfo) {
+    public Optional<LoginEmpleado> autenticarEmpleado(EmpleadoLoginDto loginInfo) {
         return empleadosRepositoryPort.autenticar(loginInfo);
     }
 }

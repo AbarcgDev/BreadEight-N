@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class Producto {
-    private Long clave;
+    private String idPan;
     private String nombre;
     private Double precio;
 }

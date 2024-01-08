@@ -1,11 +1,15 @@
 package com.breadeightn.panaderias.empleados.infrastructure.persistence.repository.adapters;
 
+import com.breadeightn.panaderias.areas.domain.Area;
 import com.breadeightn.panaderias.empleados.domain.dto.EmpleadoLoginDto;
-import com.breadeightn.panaderias.empleados.domain.model.Empleado;
-import com.breadeightn.panaderias.empleados.domain.model.SesionInfo;
+import com.breadeightn.panaderias.empleados.domain.model.InfoEmpleado;
+import com.breadeightn.panaderias.empleados.domain.model.LoginEmpleado;
 import com.breadeightn.panaderias.empleados.domain.ports.out.EmpleadosRepositoryPort;
-import com.breadeightn.panaderias.empleados.infrastructure.persistence.entity.EmpleadoEntity;
+import com.breadeightn.panaderias.empleados.infrastructure.persistence.entity.InfoEmpleadoEntity;
+import com.breadeightn.panaderias.empleados.infrastructure.persistence.entity.LoginEmpleadoEntity;
 import com.breadeightn.panaderias.empleados.infrastructure.persistence.repository.EmpleadosRepository;
+import com.breadeightn.panaderias.empleados.infrastructure.persistence.repository.LoginEmpleadoRepository;
+import jakarta.transaction.Transactional;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -15,38 +19,46 @@ import java.util.Optional;
 @Component
 public class EmpleadosRepositoryAdapter implements EmpleadosRepositoryPort {
     private final EmpleadosRepository empleadosRepository;
+    private final LoginEmpleadoRepository loginRepository;
     @Override
-    public Empleado guardar(Empleado empleado) {
+    public InfoEmpleado guardar(InfoEmpleado infoEmpleado) {
         return null;
     }
 
     @Override
-    public Optional<Empleado> encontrarPorRFC(String rfc) {
+    public Optional<InfoEmpleado> encontrarPorRFC(String rfc) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<Empleado> actualizar(Empleado empleadoActualizado) {
+    public Optional<InfoEmpleado> actualizar(InfoEmpleado infoEmpleadoActualizado) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<Empleado> eliminarPorRFC(String rfc) {
+    public Optional<InfoEmpleado> eliminarPorRFC(String rfc) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<SesionInfo> autenticar(EmpleadoLoginDto loginInfo) {
-        Optional<EmpleadoEntity> user = empleadosRepository.findById(loginInfo.getRfc());
-        Optional<SesionInfo> result = Optional.empty();
-        if (user.isPresent() && user.get().getPassword().matches(loginInfo.getPassword())) {
-            result = Optional.of(SesionInfo
-                    .builder()
-                    .nombre(user.get().getNombre())
-                    .rol(user.get().getRol())
-                    .rfc(user.get().getRfc())
-                    .area(user.get().getArea())
-                    .build());
+    @Transactional
+    public Optional<LoginEmpleado> autenticar(EmpleadoLoginDto loginInfo) {
+        Optional<InfoEmpleadoEntity> user = empleadosRepository.findById(loginInfo.getRfc());
+        Optional<LoginEmpleado> result = Optional.empty();
+        if (user.isPresent()) {
+            Optional<LoginEmpleadoEntity> login = user.get()
+                    .getLoginEmpleadoEntities()
+                    .stream()
+                    .filter(loginEmpleadoEntity -> loginEmpleadoEntity.getPass().equals(loginInfo.getPassword()))
+                    .findFirst();
+            if (login.isPresent()) {
+                result = Optional.of(LoginEmpleado
+                        .builder()
+                        .rol(user.get().getRol())
+                        .area(Area.get(user.get().getArea()))
+                        .infoEmpleado(login.get().getInfoEmpleado().toModel())
+                        .build());
+            }
         }
         return result;
     }

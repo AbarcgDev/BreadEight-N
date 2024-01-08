@@ -11,7 +11,7 @@ import java.util.Optional;
 public class ProductoService implements BuscarProducto {
     private final BuscarProductoImpl buscarProductoImpl;
     @Override
-    public Optional<Producto> buscarProductoPorClave(Long clave) {
+    public Optional<Producto> buscarProductoPorClave(String clave) {
         return buscarProductoImpl.buscarProductoPorClave(clave);
     }
 }

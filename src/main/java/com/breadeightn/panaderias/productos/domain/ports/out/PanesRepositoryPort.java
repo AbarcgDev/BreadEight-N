@@ -4,6 +4,6 @@ import com.breadeightn.panaderias.productos.domain.model.Producto;
 
 import java.util.Optional;
 
-public interface ProductosRepositoryPort {
-    Optional<Producto> buscarPorClave(Long clave);
+public interface PanesRepositoryPort {
+    Optional<Producto> buscarPorClave(String clave);
 }

@@ -1,9 +1,9 @@
 package com.breadeightn.panaderias.productos.infrastructure.persistence.repository;
 
-import com.breadeightn.panaderias.productos.infrastructure.persistence.entity.ProductoEntity;
+import com.breadeightn.panaderias.productos.infrastructure.persistence.entity.PanesEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductosRepository extends CrudRepository<ProductoEntity,Long> {
+public interface PanesRepository extends CrudRepository<PanesEntity, String> {
 }

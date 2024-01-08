@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720" prefWidth="1280" styleClass="login-pane" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.breadeightn.panaderias.empleados.infrastructure.uicontrollers.LoginCtrl">
+<AnchorPane prefHeight="720" prefWidth="1280" styleClass="login-pane" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.breadeightn.panaderias.fxcontrollers.LoginCtrl">
     <VBox layoutX="453.0" layoutY="407.0" prefHeight="106.0" prefWidth="375.0" spacing="10">
         <!-- ... tus otros nodos ... -->
         <TextField fx:id="rfcField" promptText="RFC" styleClass="text-field" />

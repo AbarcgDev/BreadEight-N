@@ -5,5 +5,5 @@ import com.breadeightn.panaderias.productos.domain.model.Producto;
 import java.util.Optional;
 
 public interface BuscarProducto {
-    Optional<Producto> buscarProductoPorClave(Long clave);
+    Optional<Producto> buscarProductoPorClave(String clave);
 }
