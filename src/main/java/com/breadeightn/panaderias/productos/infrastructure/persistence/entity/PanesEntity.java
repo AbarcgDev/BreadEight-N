@@ -36,4 +36,13 @@ public class PanesEntity {
                 .nombre(producto.getNombre())
                 .build();
     }
+
+    public Producto toModel() {
+        return Producto.builder()
+                .idPan(idPan)
+                .nombre(nombre)
+                .precio(precio)
+                .tipo(tipo.getNombreTipo())
+                .build();
+    }
 }

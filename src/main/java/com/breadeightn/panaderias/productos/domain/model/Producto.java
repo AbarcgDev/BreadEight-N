@@ -10,5 +10,7 @@ import lombok.Data;
 public class Producto {
     private String idPan;
     private String nombre;
+    private String tipo;
     private Double precio;
+
 }

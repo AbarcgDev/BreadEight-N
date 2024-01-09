@@ -61,7 +61,7 @@ public class LoginCtrl implements Initializable {
         try {
             loader.setControllerFactory(context::getBean);
             root = loader.load();
-            VentasVendedorCtrl controller = loader.getController();
+            PanaderiaViewController controller = loader.getController();
             controller.initializeSessionInfo(loginEmpleado);
             Scene scene = new Scene(root);
             Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -76,7 +76,7 @@ public class LoginCtrl implements Initializable {
     private FXMLLoader getView(Area area) {
         String vista = switch (area) {
             case VENTAS -> "ventasVendedor";
-            case RECURSOS_HUMANOS -> "recursosHumanos";
+            case INVENTARIO -> "inventario";
         };
         return new FXMLLoader(PanaderiasApplication.class.getResource("/views/" + vista + ".fxml"));
     }

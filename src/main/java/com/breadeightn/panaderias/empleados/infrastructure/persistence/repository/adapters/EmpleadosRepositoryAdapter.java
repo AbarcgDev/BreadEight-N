@@ -55,7 +55,7 @@ public class EmpleadosRepositoryAdapter implements EmpleadosRepositoryPort {
                 result = Optional.of(LoginEmpleado
                         .builder()
                         .rol(user.get().getRol())
-                        .area(Area.get(user.get().getArea()))
+                        .area(Area.get(user.get().getArea().toUpperCase()))
                         .infoEmpleado(login.get().getInfoEmpleado().toModel())
                         .build());
             }

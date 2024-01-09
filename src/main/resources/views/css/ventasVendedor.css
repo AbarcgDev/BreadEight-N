@@ -93,3 +93,22 @@
     -fx-background-color: #2F6D34; /* Tono aún más oscuro al estar presionado */
 }
 
+/* Archivo CSS */
+
+.table-cell:hover {
+    -fx-background-color: derive(palegreen, 10%);
+}
+
+.table-row-cell:focused {
+    -fx-background-color: derive(palegreen, 50%);
+}
+/* Archivo CSS */
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: black;
+}
+
+/* Archivo CSS */
+
+
+

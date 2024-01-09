@@ -6,8 +6,8 @@ import lombok.Getter;
 import java.util.Arrays;
 @Getter
 public enum Area {
-    VENTAS("VT","Ventas"),
-    RECURSOS_HUMANOS("RRHH","Recursos Humanos");
+    VENTAS("VT","VENTAS"),
+    INVENTARIO("IV","INVENTARIO");
 
     private String nombre;
     private String clave;
@@ -19,7 +19,7 @@ public enum Area {
 
     public static Area get(String clave) {
         return Arrays.stream(Area.values())
-                .filter((area -> area.getClave().equals(clave)))
+                .filter((area -> area.getNombre().equals(clave)))
                 .findFirst().orElse(Area.VENTAS);
     }
 }
