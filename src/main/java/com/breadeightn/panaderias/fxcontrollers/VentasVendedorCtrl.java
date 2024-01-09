@@ -1,5 +1,6 @@
 package com.breadeightn.panaderias.fxcontrollers;
 
+import com.breadeightn.panaderias.PanaderiasApplication;
 import com.breadeightn.panaderias.productos.application.services.ProductoService;
 import com.breadeightn.panaderias.productos.domain.model.Producto;
 import com.breadeightn.panaderias.ventas.application.services.VentasService;
@@ -10,11 +11,16 @@ import com.breadeightn.panaderias.ventas.domain.model.Venta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,6 +29,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Function;
+
+import static com.breadeightn.panaderias.PanaderiasApplication.context;
 
 @Component
 public class VentasVendedorCtrl implements Initializable, PanaderiaViewController {
@@ -48,11 +56,14 @@ public class VentasVendedorCtrl implements Initializable, PanaderiaViewControlle
     private TableColumn<ProductoVenta, Integer> cantidadProductoTable;
     @FXML
     private TableColumn<ProductoVenta, Double> precioProductoTable;
+    @FXML
+    private Label labelTotal;
     private LoginEmpleado loginEmpleado;
     private ObservableList<ProductoVenta> productos = FXCollections.observableArrayList();
     private Producto productoActual;
     private final ProductoService productoService;
     private final VentasService ventasService;
+
     public VentasVendedorCtrl(ProductoService productoService, VentasService ventasService) {
         this.productoService = productoService;
         this.ventasService = ventasService;
@@ -142,6 +153,7 @@ public class VentasVendedorCtrl implements Initializable, PanaderiaViewControlle
         claveProductoForm.clear();
         nombreProductoForm.clear();
         cantidadProductoForm.clear();
+        actualizarTotal();
     }
 
     public void crearVenta() {
@@ -163,5 +175,58 @@ public class VentasVendedorCtrl implements Initializable, PanaderiaViewControlle
                 .orElse(0.0)
         );
         ventasService.crearVenta(venta);
+        ventaTable.getItems().clear();
+        productos.clear();
+        mostrarNotificacionVenta();
+        labelTotal.setText("$ 00.00");
+    }
+
+    private void actualizarTotal() {
+        labelTotal.setText(String.format("$ %.2f", productos.stream()
+                        .map(productoVenta -> {
+                            return  productoVenta.getProducto().getPrecio() * productoVenta.getCantidad();
+                        })
+                        .reduce(Double::sum)
+                        .orElse(0.0)
+        ));
+    }
+
+    private void mostrarNotificacionVenta() {
+        var stage = (Stage) ventaTable.getScene().getWindow();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Venta Realizada");
+        alert.setHeaderText(null);
+        alert.setContentText("Venta realizada con total " + labelTotal.getText());
+        alert.showAndWait();
+    }
+    public void cancelarVenta() {
+        var stage = (Stage) ventaTable.getScene().getWindow();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancelar venta");
+        alert.setHeaderText(null);
+        alert.setContentText("Confirma cancelacion de venta");
+        var result = alert.showAndWait().orElse(ButtonType.CANCEL);
+        if (result == ButtonType.OK) {
+            ventaTable.getItems().clear();
+            labelTotal.setText("$ 00.00");
+            productos.clear();
+        }
+    }
+
+    public void salir() {
+        FXMLLoader loader = new FXMLLoader(PanaderiasApplication.class.getResource("/views/login.fxml"));
+        Parent root = null;
+        try {
+            loader.setControllerFactory(context::getBean);
+            root = loader.load();
+            LoginCtrl controller = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ventaTable.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -7,27 +8,20 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1278.0" stylesheets="@css/ventasVendedor.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.breadeightn.panaderias.fxcontrollers.VentasVendedorCtrl">
    <top>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button mnemonicParsing="false" text="Button" />
+          <Button onAction="#salir" mnemonicParsing="false" text="Salir" />
         </buttons>
       </ButtonBar>
    </top>
-   <left>
-      <ToolBar prefHeight="723.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <items>
-          <Button mnemonicParsing="false" text="Button" />
-        </items>
-      </ToolBar>
-   </left>
    <center>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -39,30 +33,55 @@
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="claveProductoForm" />
-                              <Button mnemonicParsing="false" text="Buscar" onAction="#buscarProducto"/>
+                              <Button mnemonicParsing="false" onAction="#buscarProducto" text="Buscar" />
                            </children>
                         </HBox>
                         <Label text="Nombre" />
                         <TextField fx:id="nombreProductoForm" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="178.0" />
                         <Label text="Cantidad" />
                         <TextField fx:id="cantidadProductoForm" />
-                        <Button mnemonicParsing="false" text="Agregar" onAction="#agregarProducto"/>
+                        <Button mnemonicParsing="false" onAction="#agregarProducto" text="Agregar" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="621.0" prefWidth="716.0">
                <children>
-                  <TableView fx:id="ventaTable" layoutX="134.0" layoutY="36.0" prefHeight="500.0" prefWidth="500.0">
-                    <columns>
-                      <TableColumn fx:id="claveProductoTable" minWidth="20.0" prefWidth="100.0" text="Clave" />
-                      <TableColumn fx:id="nombreProductoTable" prefWidth="200.0" text="nombre" />
-                        <TableColumn fx:id="precioProductoTable" minWidth="20.0" prefWidth="100.0" text="Precio" />
-                        <TableColumn fx:id="cantidadProductoTable" prefWidth="100.0" text="Cantidad" />
-                    </columns>
-                  </TableView>
-                  <Button layoutX="132.0" layoutY="568.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Cancelar" />
-                  <Button fx:id="crearVentaBtn" onAction="#crearVenta" layoutX="441.0" layoutY="567.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="200.0" text="Aceptar" />
+                  <BorderPane prefHeight="652.0" prefWidth="892.0">
+                     <center>
+                        <TableView fx:id="ventaTable" prefHeight="528.0" prefWidth="856.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="claveProductoTable" minWidth="20.0" prefWidth="100.0" text="Clave" />
+                            <TableColumn fx:id="nombreProductoTable" prefWidth="300.0" text="nombre" />
+                              <TableColumn fx:id="precioProductoTable" minWidth="20.0" prefWidth="200.0" text="Precio" />
+                              <TableColumn fx:id="cantidadProductoTable" prefWidth="150.0" text="Cantidad" />
+                          </columns>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button onAction="#cancelarVenta" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Cancelar" />
+                              <Button fx:id="crearVentaBtn" mnemonicParsing="false" onAction="#crearVenta" prefHeight="24.0" prefWidth="200.0" text="Aceptar" />
+                           </children>
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </HBox>
+                     </bottom>
+                     <right>
+                        <VBox alignment="CENTER" prefHeight="552.0" prefWidth="142.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Total:" />
+                              <Label fx:id="labelTotal" text="\$ 00.00" textAlignment="JUSTIFY">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </right>
+                  </BorderPane>
                </children>
             </AnchorPane>
         </items>

@@ -9,15 +9,19 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="720" prefWidth="1280" styleClass="login-pane" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.breadeightn.panaderias.fxcontrollers.LoginCtrl">
-    <VBox layoutX="453.0" layoutY="407.0" prefHeight="106.0" prefWidth="375.0" spacing="10">
-        <!-- ... tus otros nodos ... -->
-        <TextField fx:id="rfcField" promptText="RFC" styleClass="text-field" />
-        <PasswordField fx:id="passwordField" promptText="Contrasena" styleClass="password-field" />
-        <Button fx:id="loginButton" styleClass="button" text="Entrar" onAction="#handleLogin"/>
-    </VBox>
-   <ImageView fitHeight="312.0" fitWidth="299.0" layoutX="491.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/logo.png" />
-      </image>
-   </ImageView>
+   <VBox layoutX="483.0" layoutY="127.0" prefHeight="200.0" prefWidth="100.0">
+      <children>
+         <ImageView fitHeight="312.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/logo.png" />
+            </image>
+         </ImageView>
+          <VBox prefHeight="106.0" prefWidth="375.0" spacing="10">
+              <!-- ... tus otros nodos ... -->
+              <TextField fx:id="rfcField" promptText="RFC" styleClass="text-field" />
+              <PasswordField fx:id="passwordField" promptText="Contrasena" styleClass="password-field" />
+              <Button fx:id="loginButton" onAction="#handleLogin" styleClass="button" text="Entrar" />
+          </VBox>
+      </children>
+   </VBox>
 </AnchorPane>
