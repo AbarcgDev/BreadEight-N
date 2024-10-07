@@ -63,8 +63,8 @@
                <items>
                         <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="158.0" prefWidth="244.0" spacing="10.0">
                             <children>
-                        <Button mnemonicParsing="false" text="Nuevo" />
-                                  <Button mnemonicParsing="false" text="Confirmar" />
+                        <Button mnemonicParsing="false" text="Nuevo" onAction="#nuevo"/>
+                                  <Button mnemonicParsing="false" text="Confirmar" onAction="#confirmar"/>
                             </children>
                         </VBox>
                   <TableView fx:id="actualizacionTable" prefHeight="528.0" prefWidth="856.0">

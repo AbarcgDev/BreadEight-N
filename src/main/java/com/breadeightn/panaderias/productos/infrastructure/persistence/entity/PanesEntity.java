@@ -25,7 +25,7 @@ public class PanesEntity {
     @Column(name = "precio")
     private Double precio;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_tipo", referencedColumnName = "id_tipo")
     private TipoPanesEntity tipo;
 
