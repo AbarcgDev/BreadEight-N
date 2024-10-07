@@ -21,7 +21,7 @@ public class InventarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idInventario;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pan", referencedColumnName = "id_pan")
     private PanesEntity pan;
 

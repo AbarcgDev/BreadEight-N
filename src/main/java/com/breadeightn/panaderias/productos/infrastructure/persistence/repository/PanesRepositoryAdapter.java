@@ -25,6 +25,7 @@ public class PanesRepositoryAdapter implements PanesRepositoryPort {
                     .idPan(entity.get().getIdPan())
                     .nombre(entity.get().getNombre())
                     .precio(entity.get().getPrecio())
+                    .tipo(entity.get().getTipo().toModel())
                     .build()
             );
         }

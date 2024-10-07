@@ -143,6 +143,7 @@ public class VentasVendedorCtrl implements Initializable, PanaderiaViewControlle
                 .idPan(claveProductoForm.getText())
                 .nombre(nombreProductoForm.getText())
                 .precio(productoActual.getPrecio())
+                .tipo(productoActual.getTipo())
                 .build();
         ProductoVenta productoVenta = ProductoVenta.builder()
                 .producto(producto)
