@@ -34,6 +34,7 @@ public class PanesEntity {
                 .precio(producto.getPrecio())
                 .idPan(producto.getIdPan())
                 .nombre(producto.getNombre())
+                .tipo(TipoPanesEntity.fromModel(producto.getTipo()))
                 .build();
     }
 
@@ -42,7 +43,7 @@ public class PanesEntity {
                 .idPan(idPan)
                 .nombre(nombre)
                 .precio(precio)
-                .tipo(tipo.getNombreTipo())
+                .tipo(tipo.toModel())
                 .build();
     }
 }

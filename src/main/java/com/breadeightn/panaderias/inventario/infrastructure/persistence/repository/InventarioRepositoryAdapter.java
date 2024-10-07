@@ -2,6 +2,9 @@ package com.breadeightn.panaderias.inventario.infrastructure.persistence.reposit
 
 import com.breadeightn.panaderias.inventario.domain.model.Inventario;
 import com.breadeightn.panaderias.inventario.domain.ports.out.InventarioRepositoryPort;
+import com.breadeightn.panaderias.inventario.infrastructure.persistence.entity.InventarioEntity;
+
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +17,7 @@ public class InventarioRepositoryAdapter implements InventarioRepositoryPort {
     private final InventarioRepository inventarioRepository;
 
     @Override
+    @Transactional
     public List<Inventario> obtenerInventario() {
         List<Inventario> inventario = new ArrayList<>();
         inventarioRepository.findAll().forEach((inventarioEntity -> inventario.add(inventarioEntity.toModel())));
@@ -21,7 +25,8 @@ public class InventarioRepositoryAdapter implements InventarioRepositoryPort {
     }
 
     @Override
+    @Transactional
     public void actualizarEntradaInventario(Inventario nuevaEntrada) {
-
+        inventarioRepository.save(InventarioEntity.fromModel(nuevaEntrada));
     }
 }

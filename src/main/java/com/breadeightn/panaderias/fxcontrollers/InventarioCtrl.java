@@ -4,6 +4,8 @@ import com.breadeightn.panaderias.PanaderiasApplication;
 import com.breadeightn.panaderias.empleados.domain.model.LoginEmpleado;
 import com.breadeightn.panaderias.inventario.application.service.InventarioService;
 import com.breadeightn.panaderias.inventario.domain.model.Inventario;
+import com.breadeightn.panaderias.productos.application.services.ProductoService;
+
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -57,8 +59,11 @@ public class InventarioCtrl implements Initializable, PanaderiaViewController {
 
     private final InventarioService inventarioService;
 
-    public InventarioCtrl(InventarioService inventarioService) {
+    private final ProductoService productoService;
+
+    public InventarioCtrl(InventarioService inventarioService, ProductoService productoService) {
         this.inventarioService = inventarioService;
+        this.productoService = productoService;
     }
 
     @Override
@@ -77,26 +82,33 @@ public class InventarioCtrl implements Initializable, PanaderiaViewController {
 
     public void inicializarTabla() {
         // Configurar las celdas de la tabla
-        claveProductoColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPan().getIdPan()));
-        tipoProductoColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPan().getTipo()));
-        nombreProductoColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPan().getNombre()));
-        precioProductoColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<Double>(cellData.getValue().getPan().getPrecio()));
-        productosVendidosColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<Integer>(cellData.getValue().getUnidadesVendidas()));
-        cantidadProductoColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<Integer>(cellData.getValue().getInventario()));
+        claveProductoColumn
+                .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPan().getIdPan()));
+        tipoProductoColumn
+                .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPan().getTipo().getNombreTipo()));
+        nombreProductoColumn
+                .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPan().getNombre()));
+        precioProductoColumn.setCellValueFactory(
+                cellData -> new SimpleObjectProperty<Double>(cellData.getValue().getPan().getPrecio()));
+        productosVendidosColumn.setCellValueFactory(
+                cellData -> new SimpleObjectProperty<Integer>(cellData.getValue().getUnidadesVendidas()));
+        cantidadProductoColumn.setCellValueFactory(
+                cellData -> new SimpleObjectProperty<Integer>(cellData.getValue().getInventario()));
 
-        // Configurar la edición de las celdas
         precioProductoColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         precioProductoColumn.setOnEditCommit(event -> {
-            // Actualizar el valor en la base de datos (event.getNewValue())
-            // Aquí puedes realizar la lógica de actualización en tu base de datos
-            event.getRowValue().getPan().setPrecio(event.getNewValue());
+            Inventario inventario = event.getRowValue();
+            inventario.getPan().setPrecio(event.getNewValue());
+            productoService.guardarProducto(inventario.getPan());
+            inventarioTable.refresh();
         });
 
         cantidadProductoColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         cantidadProductoColumn.setOnEditCommit(event -> {
-            // Actualizar el valor en la base de datos (event.getNewValue())
-            // Aquí puedes realizar la lógica de actualización en tu base de datos
-            event.getRowValue().setInventario(event.getNewValue());
+            Inventario inventario = event.getRowValue();
+            inventario.setInventario(event.getNewValue());
+            inventarioService.actualizarEntradaInventario(inventario);
+            inventarioTable.refresh();
         });
 
         cantidadProductoColumn.setEditable(true);

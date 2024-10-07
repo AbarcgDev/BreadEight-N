@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface PanesRepositoryPort {
     Optional<Producto> buscarPorClave(String clave);
+    void guardarProducto(Producto producto);
 }

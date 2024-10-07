@@ -21,21 +21,25 @@ public class EmpleadosRepositoryAdapter implements EmpleadosRepositoryPort {
     private final EmpleadosRepository empleadosRepository;
     private final LoginEmpleadoRepository loginRepository;
     @Override
+    @Transactional
     public InfoEmpleado guardar(InfoEmpleado infoEmpleado) {
         return null;
     }
 
     @Override
+    @Transactional
     public Optional<InfoEmpleado> encontrarPorRFC(String rfc) {
         return Optional.empty();
     }
 
     @Override
+    @Transactional
     public Optional<InfoEmpleado> actualizar(InfoEmpleado infoEmpleadoActualizado) {
         return Optional.empty();
     }
 
     @Override
+    @Transactional
     public Optional<InfoEmpleado> eliminarPorRFC(String rfc) {
         return Optional.empty();
     }

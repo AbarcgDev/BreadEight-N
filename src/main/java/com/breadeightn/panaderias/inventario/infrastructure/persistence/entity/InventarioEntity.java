@@ -43,4 +43,14 @@ public class InventarioEntity {
                 .inventario(inventario)
                 .build();
     }
+
+    public static InventarioEntity fromModel(Inventario model) {
+        return InventarioEntity.builder()
+        .cantidadCorte(model.getCantidadCorte())
+        .idInventario(model.getIdInventario())
+        .inventario(model.getInventario())
+        .pan(PanesEntity.fromModel(model.getPan()))
+        .unidadesVendidas(model.getUnidadesVendidas())
+        .build();
+        }
 }

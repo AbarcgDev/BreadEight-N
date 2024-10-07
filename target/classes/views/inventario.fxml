@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1278.0" stylesheets="@css/ventasVendedor.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.breadeightn.panaderias.fxcontrollers.InventarioCtrl">
+    <top>
+        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <buttons>
+                <Button onAction="#salir" mnemonicParsing="false" text="Salir" />
+            </buttons>
+        </ButtonBar>
+    </top>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="500.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="nombreEmpleado" text="Empleado" />
+                <Label fx:id="nombreSucursal" text="Sucursal" />
+                <Label fx:id="fecha" text="Fecha" />
+            </children>
+        </HBox>
+    </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Inventario">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+                    <TableView fx:id="inventarioTable" prefHeight="528.0" prefWidth="1280.0">
+                        <columns>
+                            <TableColumn fx:id="claveProductoColumn" minWidth="20.0" prefWidth="200.0" text="Clave" />
+                  <TableColumn fx:id="tipoProductoColumn" prefWidth="200.0" text="Tipo" />
+                            <TableColumn fx:id="nombreProductoColumn" prefWidth="350.0" text="Nombre" />
+                            <TableColumn fx:id="precioProductoColumn" minWidth="20.0" prefWidth="200.0" text="Precio" />
+                  <TableColumn fx:id="productosVendidosColumn" prefWidth="200.0" text="Vendidos" />
+                            <TableColumn fx:id="cantidadProductoColumn" prefWidth="200.0" text="Inventario" />
+                        </columns>
+                    </TableView>
+            <HBox prefHeight="82.0" prefWidth="1278.0">
+               <children>
+                  <Label text="Ingreso y Modificacion">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <SplitPane dividerPositions="0.12539184952978055" prefHeight="259.0" prefWidth="1278.0">
+               <items>
+                        <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="158.0" prefWidth="244.0" spacing="10.0">
+                            <children>
+                        <Button mnemonicParsing="false" text="Nuevo" />
+                                  <Button mnemonicParsing="false" text="Confirmar" />
+                            </children>
+                        </VBox>
+                  <TableView fx:id="actualizacionTable" prefHeight="528.0" prefWidth="856.0">
+                     <columns>
+                        <TableColumn fx:id="claveProductoColumn1" minWidth="20.0" prefWidth="100.0" text="Clave" />
+                        <TableColumn fx:id="tipoProductoColumn1" prefWidth="150.0" text="Tipo" />
+                        <TableColumn fx:id="nombreProductoColumn1" prefWidth="300.0" text="Nombre" />
+                        <TableColumn fx:id="precioProductoColumn1" minWidth="20.0" prefWidth="200.0" text="Precio" />
+                        <TableColumn fx:id="productosVendidosColumn1" prefWidth="200.0" text="Vendidos" />
+                        <TableColumn fx:id="cantidadProductoColumn1" prefWidth="200.0" text="Inventario" />
+                     </columns>
+                  </TableView>
+               </items>
+            </SplitPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

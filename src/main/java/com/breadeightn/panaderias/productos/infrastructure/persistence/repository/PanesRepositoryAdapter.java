@@ -2,6 +2,9 @@ package com.breadeightn.panaderias.productos.infrastructure.persistence.reposito
 
 import com.breadeightn.panaderias.productos.domain.model.Producto;
 import com.breadeightn.panaderias.productos.domain.ports.out.PanesRepositoryPort;
+import com.breadeightn.panaderias.productos.infrastructure.persistence.entity.PanesEntity;
+
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +16,7 @@ public class PanesRepositoryAdapter implements PanesRepositoryPort {
     private final PanesRepository panesRepository;
 
     @Override
+    @Transactional
     public Optional<Producto> buscarPorClave(String clave) {
         var entity = panesRepository.findById(clave);
         Optional<Producto> producto = Optional.empty();
@@ -25,5 +29,11 @@ public class PanesRepositoryAdapter implements PanesRepositoryPort {
             );
         }
         return producto;
+    }
+
+    @Override
+    @Transactional
+    public void guardarProducto(Producto producto) {
+        panesRepository.save(PanesEntity.fromModel(producto));
     }
 }

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.breadeightn.panaderias.productos.domain.model.TipoProducto;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -24,4 +26,18 @@ public class TipoPanesEntity {
 
     @OneToMany(mappedBy = "tipo")
     private List<PanesEntity> panes;
+
+    public TipoProducto toModel() {
+        return TipoProducto.builder()
+        .idTipo(idTipo)
+        .nombreTipo(nombreTipo)
+        .build();
+    }
+
+    public static TipoPanesEntity fromModel(TipoProducto model) {
+        return TipoPanesEntity.builder()
+        .idTipo(model.getIdTipo())
+        .nombreTipo(model.getNombreTipo())
+        .build();
+    }
 }
